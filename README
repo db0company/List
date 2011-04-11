@@ -1,0 +1,235 @@
+LIST                   db0 company Manual for "Paysdu42"               LIST
+
+NAME
+       list - Doubly-Linked List Library
+
+ABOUT
+	A C static library for generic doubly-linked list.
+
+	Lists are a kind of sequence container. As such, their elements are
+	ordered following a linear sequence.
+
+	List containers are implemented as doubly-linked lists; Doubly linked
+	lists can store each of the elements they contain in different and
+	unrelated storage locations. The ordering is kept by the association
+	to each element of a link to the element preceding it and a link to
+	the element following it.
+
+	This provides the following advantages to list containers:
+	     * Efficient insertion and removal of elements anywhere
+	       in the container (constant time).
+	     * Efficient moving elements and block of elements within the
+	       container or even between different containers (constant time).
+    	     * Iterating over the elements in forward or reverse order (linear
+	       time).
+
+	Compared to other base standard sequence containers like arrays, lists
+	perform generally better in inserting, extracting and moving elements
+	in any position within the container.
+
+	It is recommended to feel comfortable with the following :
+	  * Generic pointers void *
+	  * Casts
+	  * Structures
+	  * Functions pointers
+
+SYNOPSIS
+       #include		"list.h"
+
+	bool		put_in_list(t_list ** list, void * data);
+	t_node *	new_node(void * data);
+	t_list *	list_from_table(char **table);
+	void		destroy_list(t_list ** list,
+				     void (*destroy_data)(void *));
+
+DESCRIPTION
+
+	Create a list using the put_in_list() function.
+	At the first call, list must be NULL.
+
+	new_node() create a new node. You must not use it.
+
+	It is possible to create a list directy from a strings table
+	like argv using the list_from_table() function.
+
+	When you're done with the list, you must destroy it using the
+	destroy_list() function. The second argument is
+	a function taking the data and detroy it. It can be NULL if the
+	data in the list don't need to be freed, it can be just "free"
+	or your own function.
+
+RETURN VALUE
+	put_in_list() return true on success, false on
+	failure (allocation failed, null pointer).
+
+	new_node() return a pointer to the new allocated
+	node, NULL on failure.
+
+	list_from_table() return the list pointer or NULL
+	on failure.
+	
+
+SYNOPSIS
+	t_list *	duplicate_list(t_list * list);
+	t_list *	duplicate_list_elem(t_list * list,
+					    void * (*duplicate)(void *));
+
+DESCRIPTION
+	Create a simple copy of a list using the
+	duplicate_list() function.
+
+	To create a copy of a list applying a function to every element,
+	use the duplicate_list_elem which 3rd argument is
+	a function taking the data in the list and returning another data.
+	Usefull if some elements must be reallocated in the copy list.
+
+RETURN VALUE
+	duplicate_list() and duplicate_list() return a pointer to the
+	new list or NULL on failure (allocation failed).
+
+
+SYNOPSIS
+	void		dump_list(t_list * list, void (*displayer)(void *));
+	void		foreach_list(t_list * list,
+				     void (*function)(void *));
+	bool		foreach_stop_list(t_list * list,
+					   bool (*function)(void *));
+	void		foreach_arg_list(t_list * list,
+					 void (*function)(void * elem,
+							  void * arg),
+					 void * arg);
+	bool		foreach_arg_stop_list(t_list * list,
+					      bool (*function)(void * elem,
+							       void * arg),
+					      void * arg);
+
+DESCRIPTION
+	The collection of foreach functions apply a
+	function to every data in the list.
+
+	foreach_list() simply apply the function to every datas.
+
+	foreach_arg_list() take an extra generic argument void *.
+
+	foreach_stop_list() stop applying the function when
+	the function return false.
+
+	foreach_arg_stop_list() is the same as previous but
+	with an extra generic argument void *.
+
+RETURN VALUE
+	foreach_stop_list() return true if it stop at the
+	first matching data and false if it stop at the end of the list
+	because no data match.
+	The same for foreach_arg_stop_list().
+
+
+SYNOPSIS
+	int		get_list_len(t_list * list);
+	
+	void *		get_data_at(t_list * list, unsigned int position);
+	void *		get_data_as(t_list * list,
+			bool (*match_data)(void *));
+	
+	t_node *	get_node_at(t_list * list, unsigned int position);
+	t_node *	get_node_as(t_list * list,
+				    bool (*match_node)(t_node *));
+DESCRIPTION
+	All the following functions do not modify the list !
+
+	get_list_len() return the number of nodes in
+	the list.
+
+	get_data_at() return the data at position.
+
+	get_data_as() return the first data which function
+	match_data return true.
+
+	get_node_at() return the node at position.
+
+	get_node_as() return the first node which function
+	match_node return true.
+
+RETURN VALUE
+	Return a NULL pointer on failure (invalid position,
+	no element match).
+	
+
+SYNOPSIS
+	void *		del_node(t_list ** list, t_node * node);
+	void *		del_node_at(t_list ** list, unsigned int pos);
+	void *		del_node_as(t_list ** list,
+				    bool (*match_data)(void *));
+	void		del_all_node_as(t_list ** list,
+					bool (*match_data)(void *),
+					void (*destroy_data)(void *));
+	
+DESCRIPTION
+	All the following functions modify the list !
+	
+	del_node() delete a node in the list and return its data.
+	You must not use this function.
+
+	del_node_at() delete the node at position and return its data.
+
+	del_node_as() delete the first node which match_data
+	return true and return its data.
+
+	Don't forget to free the data if it is allocated and you don't want
+	to use it !
+	
+	del_all_node_as() delete all nodes which match_data
+	return true. If datas must be freed, the 3rd argument can be a
+	function which take the data and free it. It can be NULL, juste free
+	or your own function.
+
+RETURN VALUE
+       Return data of the node deleted or NULL if the position is invalid or
+       the data has not been found.
+
+
+SYNOPSIS
+	bool		insert_data_at(t_list * list,
+			               unsigned int pos, void * data);
+	bool		insert_data_after(t_list * list, t_node * node,
+			                  void * data);
+	bool		insert_data_before(t_list * list, t_node * node,
+					   void * data);
+	bool		insert_node_at(t_list * list, int pos,
+				       t_node * new_node);
+	bool		insert_node_after(t_list * list, t_node * node,
+					  t_node * new_node);
+	bool		insert_node_before(t_list * list, t_node * node,
+					   t_node * new_node);
+DESCRIPTION
+	All previous functions insert a data or an element at a certain
+	position or after/before another node.
+	Be carefull of inserting elements in the same way than the others in
+	the list : if the elements were allocated, you must allocate the
+	new one.
+
+RETURN VALUE
+       Return true on success, false on failure (allocation failed, invalid
+       nodes).
+
+
+SYNOPSIS
+	void            swap_data(t_node *, t_node *);
+	void            order_list(t_list * list,
+        		            bool (*compare_data)(void *, void *));
+
+DESCRIPTION
+	swap_data() swap datas of two nodes. You must not use it.
+
+	order_list() order a list using the compare_data function.
+	This function must take two datas and return true if they must
+	be inverted, false if not.
+
+
+EXAMPLES
+	See the example.c file.
+
+SEE ALSO
+       libc(7)
+
+db0 company                       2010-08-16                           LIST
