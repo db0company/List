@@ -226,10 +226,15 @@ DESCRIPTION
 	be inverted, false if not.
 
 
+
+SOME IDEAS...
+     - In the 'at' collection of functions, start browsing the list from the
+       end or the beginning of the list depending of the size of the list
+
 EXAMPLES
 	See the example.c file.
 
 SEE ALSO
        libc(7)
 
-db0 company                       2010-08-16                           LIST
+db0 company                       2011-04-20                           LIST

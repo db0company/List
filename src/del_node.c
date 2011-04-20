@@ -24,6 +24,11 @@ void *		del_node(t_list ** list, t_node * node)
       data = node->data;
       free(node);
       --((*list)->len);
+      if (!((*list)->len))
+	{
+	  free(*list);
+	  *list = NULL;	  
+	}
       return (data);
     }
   return (NULL);
