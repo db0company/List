@@ -52,7 +52,7 @@ void *		get_data_at(t_list * list, unsigned int pos);
 void *		get_data_as(t_list * list, bool (*match_data)(void *));
 void *		get_data_as_arg(t_list * list,
 				bool (*match_data)(void *, void *),
-				void * arg)
+				void * arg);
 
 t_node *	get_node_at(t_list * list, unsigned int pos);
 t_node *	get_node_as(t_list * list, bool (*match_node)(t_node *));
@@ -63,6 +63,9 @@ t_node *	get_node_as_arg(t_list * list,
 void *		del_node(t_list ** list, t_node * node);
 void *		del_node_at(t_list ** list, unsigned int pos);
 void *		del_node_as(t_list ** list, bool (*match_data)(void *));
+void *		del_node_as_arg(t_list ** list,
+				bool (*match_node)(void *, void *),
+				void * arg);
 void		del_all_node_as(t_list ** list, bool (*match_data)(void *),
 				void (*destroy_data)(void *));
 void		del_all_node_as_arg(t_list ** list,
