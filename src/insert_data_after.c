@@ -14,9 +14,7 @@ bool		insert_data_after(t_list * list, t_node * node, void * data)
   if ((new = new_node(data)))
     {
       if ((insert_node_after(list, node, new)))
-	{
-	  return (true);
-	}
+	return (true);
       free(new);
     }
   return (false);

@@ -129,11 +129,18 @@ SYNOPSIS
 	
 	void *		get_data_at(t_list * list, unsigned int position);
 	void *		get_data_as(t_list * list,
-			bool (*match_data)(void *));
-	
+				    bool (*match_data)(void *));
+	void *		get_data_as_arg(t_list * list,
+					bool (*match_data)(void *, void *),
+					void * arg);
+
 	t_node *	get_node_at(t_list * list, unsigned int position);
 	t_node *	get_node_as(t_list * list,
 				    bool (*match_node)(t_node *));
+	t_node *	get_node_as_arg(t_list * list,
+					bool (*match_node)(t_node *, void *),
+					void * arg);
+
 DESCRIPTION
 	All the following functions do not modify the list !
 
@@ -144,11 +151,15 @@ DESCRIPTION
 
 	get_data_as() return the first data which function
 	match_data return true.
+	get_data_as_arg() do the same as get_data_as() but take an other
+	argument which will be given to the match_data function.
 
 	get_node_at() return the node at position.
 
 	get_node_as() return the first node which function
 	match_node return true.
+	get_node_as_arg() do the same as get_node_as() but take an other
+	argument which will be given to the match_node function.
 
 RETURN VALUE
 	Return a NULL pointer on failure (invalid position,
@@ -160,9 +171,16 @@ SYNOPSIS
 	void *		del_node_at(t_list ** list, unsigned int pos);
 	void *		del_node_as(t_list ** list,
 				    bool (*match_data)(void *));
+	void *		del_node_as_arg(t_list ** list,
+					bool (*match_node)(void *, void *),
+					void * arg);
 	void		del_all_node_as(t_list ** list,
 					bool (*match_data)(void *),
 					void (*destroy_data)(void *));
+	void		del_all_node_as_arg(t_list ** list,
+					    bool (*match_node)(void *, void *),
+					    void (*destroy_data)(void *),
+					    void * arg);
 	
 DESCRIPTION
 	All the following functions modify the list !
@@ -174,6 +192,8 @@ DESCRIPTION
 
 	del_node_as() delete the first node which match_data
 	return true and return its data.
+	del_node_as_arg() do the same as del_node_as() but take an other
+	argument which will be given to the match_node function.
 
 	Don't forget to free the data if it is allocated and you don't want
 	to use it !
@@ -182,6 +202,9 @@ DESCRIPTION
 	return true. If datas must be freed, the 3rd argument can be a
 	function which take the data and free it. It can be NULL, juste free
 	or your own function.
+
+	del_all_node_as_arg() do the same as del_all_node_as() but take an
+	other argument which will be given to the match_node function.
 
 RETURN VALUE
        Return data of the node deleted or NULL if the position is invalid or
@@ -229,7 +252,8 @@ DESCRIPTION
 
 SOME IDEAS...
      - In the 'at' collection of functions, start browsing the list from the
-       end or the beginning of the list depending of the size of the list
+       end or the beginning of the list depending of the size of the list.
+     - sub_list() which create a new list containing nodes that match a func.
 
 EXAMPLES
 	See the example.c file.

@@ -27,13 +27,17 @@ SRCS		=	$(SRC_DIR)put_in_list.c				\
 			\
 			$(SRC_DIR)get_data_at.c				\
 			$(SRC_DIR)get_data_as.c				\
+			$(SRC_DIR)get_data_as_arg.c			\
 			$(SRC_DIR)get_node_at.c				\
 			$(SRC_DIR)get_node_as.c				\
+			$(SRC_DIR)get_node_as_arg.c			\
 			\
 			$(SRC_DIR)del_node.c				\
 			$(SRC_DIR)del_node_at.c				\
 			$(SRC_DIR)del_node_as.c				\
+			$(SRC_DIR)del_node_as_arg.c			\
 			$(SRC_DIR)del_all_node_as.c			\
+			$(SRC_DIR)del_all_node_as_arg.c			\
 			\
 			$(SRC_DIR)insert_data_at.c			\
 			$(SRC_DIR)insert_data_after.c			\
