@@ -11,12 +11,12 @@ void *		del_node_as_arg(t_list ** list,
 				bool (*match_node)(void *, void *),
 				void * arg)
 {
-  if ((*list))
+  if (*list)
     {
       (*list)->cur = (*list)->begin;
       while ((*list)->cur)
 	{
-	  if (match_node((*list)->cur, arg))
+	  if (match_node((*list)->cur->data, arg))
 	    return (del_node(list, ((*list)->cur)));
 	  (*list)->cur = (*list)->cur->next;
 	}

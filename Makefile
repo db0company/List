@@ -23,6 +23,9 @@ SRCS		=	$(SRC_DIR)put_in_list.c				\
 			$(SRC_DIR)foreach_arg_list.c			\
 			$(SRC_DIR)foreach_arg_stop_list.c		\
 			\
+			$(SRC_DIR)sub_list.c				\
+			$(SRC_DIR)sub_list_arg.c			\
+			\
 			$(SRC_DIR)get_list_len.c			\
 			\
 			$(SRC_DIR)get_data_at.c				\

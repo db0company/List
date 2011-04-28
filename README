@@ -125,6 +125,21 @@ RETURN VALUE
 
 
 SYNOPSIS
+	t_list *	sub_list(t_list * list,
+			 bool (*function)(void *));
+	t_list *	sub_list_arg(t_list * list,
+			     bool (*function)(void *, void * arg),
+			     void * arg);
+
+DESCRIPTION
+	sub_list() create a new list containing nodes that match the function.
+	sub_list_arg() do the same as sub_list() but take an other argument
+	which will be given to the function.
+
+RETURN VALUE
+
+
+SYNOPSIS
 	int		get_list_len(t_list * list);
 	
 	void *		get_data_at(t_list * list, unsigned int position);
@@ -253,7 +268,6 @@ DESCRIPTION
 SOME IDEAS...
      - In the 'at' collection of functions, start browsing the list from the
        end or the beginning of the list depending of the size of the list.
-     - sub_list() which create a new list containing nodes that match a func.
 
 EXAMPLES
 	See the example.c file.

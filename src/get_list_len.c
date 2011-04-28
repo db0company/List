@@ -8,5 +8,5 @@
 
 int		get_list_len(t_list * list)
 {
-  return (list->len);
+  return (list ? list->len : 0);
 }

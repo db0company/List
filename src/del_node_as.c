@@ -14,7 +14,7 @@ void *		del_node_as(t_list ** list, bool (*match_node)(void *))
       (*list)->cur = (*list)->begin;
       while ((*list)->cur)
 	{
-	  if (match_node((*list)->cur))
+	  if (match_node((*list)->cur->data))
 	    return (del_node(list, ((*list)->cur)));
 	  (*list)->cur = (*list)->cur->next;
 	}

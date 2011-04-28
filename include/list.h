@@ -46,6 +46,9 @@ bool		foreach_arg_stop_list(t_list * list,
 						       void * arg),
 				      void * arg);
 
+t_list *	sub_list(t_list * list,
+			 bool (*function)(void *));
+
 int		get_list_len(t_list * list);
 
 void *		get_data_at(t_list * list, unsigned int pos);
