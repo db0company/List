@@ -137,6 +137,8 @@ DESCRIPTION
 	which will be given to the function.
 
 RETURN VALUE
+       Return a pointer to the new list created or a NULL pointer if there is
+       no element matching or an error occurred (allocation failed).
 
 
 SYNOPSIS

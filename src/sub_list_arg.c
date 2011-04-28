@@ -20,7 +20,8 @@ t_list *	sub_list_arg(t_list * list,
       while (list->cur)
 	{
 	  if (function(list->cur->data, arg))
-	    put_in_list(&sub, list->cur->data);
+	    if (!(put_in_list(&sub, list->cur->data)))
+	      return (NULL);
 	  list->cur = list->cur->next;
 	}
     }
