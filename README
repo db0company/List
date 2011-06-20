@@ -112,7 +112,7 @@ DESCRIPTION
 	foreach_arg_list() take an extra generic argument void *.
 
 	foreach_stop_list() stop applying the function when
-	the function return false.
+	the function return true.
 
 	foreach_arg_stop_list() is the same as previous but
 	with an extra generic argument void *.

@@ -20,6 +20,6 @@ bool		foreach_arg_stop_list(t_list * list,
 	  list->cur = list->cur->next;
 	}
     }
-  return (true);
+  return (false);
 }
 
